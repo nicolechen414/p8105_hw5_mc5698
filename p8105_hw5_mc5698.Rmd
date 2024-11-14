@@ -8,40 +8,43 @@ date: "2024-11-12"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-#Problem 1
+
 ```{r}
 library(tidyverse)
 library(rvest)
+library(broom)
 ```
-
+#Problem 1
 ```{r}
-# Function to simulate birthday matching
-birthday_simulation <- function(n) {
+# Run the simulation
+birthday_sim = 
+  function(n) {
   birthdays <- sample(1:365, n, replace = TRUE)
   return(any(duplicated(birthdays))) 
 }
 ```
 
 ```{r}
-# Run the simulation
 set.seed(123)
-group_sizes <- 2:50
-n_simulations <- 10000
-
-birthday_results =
-  map_dbl(group_sizes, function(n) {
-  mean(replicate(n_simulations, birthday_simulation(n))) 
-})
-
+sim_results_df =
+  expand_grid(
+  group_size = 2:50,
+  iter = 1:10000
+) |>
+  mutate(
+    has_shared_birthday = map_lgl(group_size, birthday_sim)
+  )
 ```
 
 ```{r}
 # plot
-birthday_data <- tibble(group_size = group_sizes, probability = birthday_results)
+birthday_prob <- sim_results_df %>%
+  group_by(group_size) %>%
+  summarize(probability = mean(has_shared_birthday))
 
-ggplot(birthday_data, aes(x = group_size, y = probability)) +
+ggplot(birthday_prob, aes(x = group_size, y = probability)) +
   geom_line() +
-  labs(title = "Probability of Shared Birthday by Group Size",
+  labs(title = "Probability that at least two people share a birthday",
        x = "Group Size",
        y = "Probability of Shared Birthday") +
   theme_minimal()
@@ -59,31 +62,33 @@ alpha <- 0.05
 ```
 
 ```{r}
-simulate_power = function(mu) {
-  results <- replicate(n_simulations, {
-    x <- rnorm(n, mean = mu, sd = sigma)
-    test <- t.test(x, mu = 0)
-    tibble(
-      mu_hat = mean(x),   
-      p_value = test$p.value
-    )}, 
-    simplify = FALSE) %>% 
-    bind_rows()
-  results <- results %>% 
-  mutate(mu = mu)
-  return(results)
+#Define function
+one_sample_sim = function(mu) {
+  x <- rnorm(n, mean = mu, sd = sigma)
+  t_test_result <- t.test(x, mu = 0) %>% 
+    tidy() %>% 
+    select(estimate, p.value)  
+  colnames(t_test_result) <- c("mu_hat", "p_value")
+  return(t_test_result)
 }
 ```
 
 ```{r}
 #Run the simulation
 set.seed(123) 
-simulation_results <- map_dfr(mu_values, simulate_power)
+sim_results_df <- expand_grid(
+  mu = 0:6,
+  iter = 1:5000
+) %>%
+  mutate(
+    test_results = map(mu, one_sample_sim)
+  ) %>%
+  unnest(test_results)
 
 ```
 
 ```{r}
-power_analysis = simulation_results %>%
+power_analysis = sim_results_df %>%
   group_by(mu) %>%
   summarize(
     power = mean(p_value < alpha),
@@ -95,7 +100,7 @@ power_analysis = simulation_results %>%
 # Plot power as a function of mu
 ggplot(power_analysis, aes(x = mu, y = power)) +
   geom_line() +
-  labs(title = "Power of One-Sample t-Test by Effect Size",
+  labs(title = "Power of One Sample t-Test by Effect Size",
        x = "True Mean (mu)",
        y = "Power") +
   theme_minimal()
@@ -103,7 +108,7 @@ ggplot(power_analysis, aes(x = mu, y = power)) +
 ```
 
 ```{r}
-# Plot average estimate
+# Plot the average estimate of 𝜇̂ on the y axis and the true value of 𝜇 on the x axis.
 ggplot(power_analysis, aes(x = mu)) +
   geom_line(aes(y = avg_mu_hat, color = "All Samples")) +
   geom_line(aes(y = avg_mu_hat_rejected, color = "Rejected Samples")) +
@@ -114,3 +119,4 @@ ggplot(power_analysis, aes(x = mu)) +
   theme_minimal()
 ```
 
+#Problem 3
