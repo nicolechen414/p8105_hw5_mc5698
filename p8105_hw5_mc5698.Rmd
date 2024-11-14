@@ -120,3 +120,72 @@ ggplot(power_analysis, aes(x = mu)) +
 ```
 
 #Problem 3
+```{r}
+#Load dataset
+homicides <- read_csv("homicide-data.csv")
+homicides
+summary(homicides)
+```
+The raw dataset has 52,179 records from U.S. cities, detailing individual homicides from January 1, 2007, to November 5, 2015. Each record includes the unique identifier (uid), report date, victim details (name, race, age, and gender), and the city and state. Moreover, latitude and longitude coordinates provide precise location data. 
+```{r}
+#Define city_state variable
+unsolved_cases <- c("Closed without arrest", "Open/No arrest")
+
+homicides <- homicides %>%
+  mutate(city_state = paste(city, state, sep = ", ")) %>%  
+  group_by(city_state) %>%
+  summarize(
+    total_homicides = n(),
+    unsolved_homicides = sum(disposition %in% unsolved_cases)
+  ) %>%
+  ungroup()
+homicides
+```
+
+```{r}
+#Use the prop.test function to estimate the proportion of homicides that are unsolved
+baltimore_data <- homicides %>%
+  filter(city_state == "Baltimore, MD")
+
+baltimore_test = prop.test(baltimore_data$unsolved_homicides,
+                           baltimore_data$total_homicides)
+baltimore_results = 
+  tidy(baltimore_test) %>%
+  select(estimate, conf.low, conf.high) %>%
+  rename(
+    proportion_unsolved = estimate,
+    conf_low = conf.low,
+    conf_high = conf.high
+  )
+baltimore_results
+```
+```{r}
+#Run prop.test for each city
+city_proportions <- homicides %>%
+  mutate(
+    test = map2(unsolved_homicides, total_homicides, ~ binom.test(.x, .y)),
+    test_summary = map(test, broom::tidy)
+  ) %>%
+  unnest(test_summary) %>%
+  select(city_state, estimate, conf.low, conf.high)
+
+```
+
+```{r}
+# Order cities by proportion
+city_proportions <- city_proportions %>%
+  arrange(desc(estimate))
+
+# Plotting
+ggplot(city_proportions, aes(x = reorder(city_state, estimate), y = estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), width = 0.2) +
+  labs(
+    title = "Proportion of Unsolved Homicides by City",
+    x = "City",
+    y = "Proportion of Unsolved Homicides"
+  ) +
+  theme_minimal() +
+  coord_flip()
+```
+
