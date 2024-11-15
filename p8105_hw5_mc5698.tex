@@ -1,0 +1,482 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={p8105\_hw5\_mc5698},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{p8105\_hw5\_mc5698}
+\author{}
+\date{\vspace{-2.5em}2024-11-12}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rvest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'rvest'
+## 
+## The following object is masked from 'package:readr':
+## 
+##     guess_encoding
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(broom)}
+\end{Highlighting}
+\end{Shaded}
+
+\#Problem 1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Run the simulation}
+\NormalTok{birthday\_sim }\OtherTok{=} 
+  \ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  birthdays }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{365}\NormalTok{, n, }\AttributeTok{replace =} \ConstantTok{TRUE}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{any}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(birthdays))) }
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sim\_results\_df }\OtherTok{=}
+  \FunctionTok{expand\_grid}\NormalTok{(}
+  \AttributeTok{group\_size =} \DecValTok{2}\SpecialCharTok{:}\DecValTok{50}\NormalTok{,}
+  \AttributeTok{iter =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{10000}
+\NormalTok{) }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{has\_shared\_birthday =} \FunctionTok{map\_lgl}\NormalTok{(group\_size, birthday\_sim)}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plot}
+\NormalTok{birthday\_prob }\OtherTok{\textless{}{-}}\NormalTok{ sim\_results\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(group\_size) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{probability =} \FunctionTok{mean}\NormalTok{(has\_shared\_birthday))}
+
+\FunctionTok{ggplot}\NormalTok{(birthday\_prob, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ group\_size, }\AttributeTok{y =}\NormalTok{ probability)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Probability that at least two people share a birthday"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Group Size"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Probability of Shared Birthday"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{p8105_hw5_mc5698_files/figure-latex/unnamed-chunk-4-1.pdf}
+This graph shows the probability that at least two people in a group
+share the same birthday increases rapidly as the group size grows. About
+23 people, there's already over a 50\% chance of a shared birthday, and
+when the group reaches 50, the probability is close to 100\%.
+
+\#Problem 2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Simulation parameters}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{30}
+\NormalTok{sigma }\OtherTok{\textless{}{-}} \DecValTok{5}
+\NormalTok{mu\_values }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\DecValTok{6}
+\NormalTok{n\_simulations }\OtherTok{\textless{}{-}} \DecValTok{5000}
+\NormalTok{alpha }\OtherTok{\textless{}{-}} \FloatTok{0.05}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Define function}
+\NormalTok{one\_sample\_sim }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(mu) \{}
+\NormalTok{  x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(n, }\AttributeTok{mean =}\NormalTok{ mu, }\AttributeTok{sd =}\NormalTok{ sigma)}
+\NormalTok{  t\_test\_result }\OtherTok{\textless{}{-}} \FunctionTok{t.test}\NormalTok{(x, }\AttributeTok{mu =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{tidy}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+    \FunctionTok{select}\NormalTok{(estimate, p.value)  }
+  \FunctionTok{colnames}\NormalTok{(t\_test\_result) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"mu\_hat"}\NormalTok{, }\StringTok{"p\_value"}\NormalTok{)}
+  \FunctionTok{return}\NormalTok{(t\_test\_result)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Run the simulation}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{) }
+\NormalTok{sim\_results\_df }\OtherTok{\textless{}{-}} \FunctionTok{expand\_grid}\NormalTok{(}
+  \AttributeTok{mu =} \DecValTok{0}\SpecialCharTok{:}\DecValTok{6}\NormalTok{,}
+  \AttributeTok{iter =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5000}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{test\_results =} \FunctionTok{map}\NormalTok{(mu, one\_sample\_sim)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest}\NormalTok{(test\_results)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power\_analysis }\OtherTok{=}\NormalTok{ sim\_results\_df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{group\_by}\NormalTok{(mu) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{power =} \FunctionTok{mean}\NormalTok{(p\_value }\SpecialCharTok{\textless{}}\NormalTok{ alpha),}
+    \AttributeTok{avg\_mu\_hat =} \FunctionTok{mean}\NormalTok{(mu\_hat),             }
+    \AttributeTok{avg\_mu\_hat\_rejected =} \FunctionTok{mean}\NormalTok{(mu\_hat[p\_value }\SpecialCharTok{\textless{}}\NormalTok{ alpha], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot power as a function of mu}
+\FunctionTok{ggplot}\NormalTok{(power\_analysis, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mu, }\AttributeTok{y =}\NormalTok{ power)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Power of One Sample t{-}Test by Effect Size"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"True Mean (mu)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Power"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{p8105_hw5_mc5698_files/figure-latex/unnamed-chunk-9-1.pdf}
+This graph shows that as the effect size (true mean) increases, the
+power of the one-sample t-test also increases. When μ is close to zero,
+the power is low, meaning the test rarely detects a difference. As true
+mean increases, the power quickly rises, reaching near certainty around
+mu = 4 which shows that larger effect sizes make it more likely for the
+test to correctly reject the null hypothesis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot the average estimate of 𝜇̂ on the y axis and the true value of 𝜇 on the x axis.}
+\FunctionTok{ggplot}\NormalTok{(power\_analysis, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ mu)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ avg\_mu\_hat, }\AttributeTok{color =} \StringTok{"All Samples"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ avg\_mu\_hat\_rejected, }\AttributeTok{color =} \StringTok{"Rejected Samples"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Average Estimate of mu\_hat by Effect Size"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"True Mean (mu)"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Average Estimate of mu\_hat"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_color\_manual}\NormalTok{(}\AttributeTok{name =} \StringTok{"Legend"}\NormalTok{, }\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"All Samples"} \OtherTok{=} \StringTok{"green"}\NormalTok{, }\StringTok{"Rejected Samples"} \OtherTok{=} \StringTok{"blue"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{p8105_hw5_mc5698_files/figure-latex/unnamed-chunk-10-1.pdf}
+The graph shows that the average estimate of mu\_hat is higher in
+samples where the null was rejected (blue line) compared to all samples
+(green line) as mu increases. This occurs because samples with higher
+means are more likely to reject the null, creating a positive bias in
+the rejected samples. Therefore, the average estimate in rejected
+samples does not equal the true mean.
+
+\#Problem 3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Load dataset}
+\NormalTok{homicides }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"homicide{-}data.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 52179 Columns: 12
+## -- Column specification --------------------------------------------------------
+## Delimiter: ","
+## chr (9): uid, victim_last, victim_first, victim_race, victim_age, victim_sex...
+## dbl (3): reported_date, lat, lon
+## 
+## i Use `spec()` to retrieve the full column specification for this data.
+## i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{homicides}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 52,179 x 12
+##    uid        reported_date victim_last  victim_first victim_race victim_age
+##    <chr>              <dbl> <chr>        <chr>        <chr>       <chr>     
+##  1 Alb-000001      20100504 GARCIA       JUAN         Hispanic    78        
+##  2 Alb-000002      20100216 MONTOYA      CAMERON      Hispanic    17        
+##  3 Alb-000003      20100601 SATTERFIELD  VIVIANA      White       15        
+##  4 Alb-000004      20100101 MENDIOLA     CARLOS       Hispanic    32        
+##  5 Alb-000005      20100102 MULA         VIVIAN       White       72        
+##  6 Alb-000006      20100126 BOOK         GERALDINE    White       91        
+##  7 Alb-000007      20100127 MALDONADO    DAVID        Hispanic    52        
+##  8 Alb-000008      20100127 MALDONADO    CONNIE       Hispanic    52        
+##  9 Alb-000009      20100130 MARTIN-LEYVA GUSTAVO      White       56        
+## 10 Alb-000010      20100210 HERRERA      ISRAEL       Hispanic    43        
+## # i 52,169 more rows
+## # i 6 more variables: victim_sex <chr>, city <chr>, state <chr>, lat <dbl>,
+## #   lon <dbl>, disposition <chr>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(homicides)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      uid            reported_date       victim_last        victim_first      
+##  Length:52179       Min.   : 20070101   Length:52179       Length:52179      
+##  Class :character   1st Qu.: 20100318   Class :character   Class :character  
+##  Mode  :character   Median : 20121216   Mode  :character   Mode  :character  
+##                     Mean   : 20130899                                        
+##                     3rd Qu.: 20150911                                        
+##                     Max.   :201511105                                        
+##                                                                              
+##  victim_race         victim_age         victim_sex            city          
+##  Length:52179       Length:52179       Length:52179       Length:52179      
+##  Class :character   Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character   Mode  :character  
+##                                                                             
+##                                                                             
+##                                                                             
+##                                                                             
+##     state                lat             lon          disposition       
+##  Length:52179       Min.   :25.73   Min.   :-122.51   Length:52179      
+##  Class :character   1st Qu.:33.77   1st Qu.: -96.00   Class :character  
+##  Mode  :character   Median :38.52   Median : -87.71   Mode  :character  
+##                     Mean   :37.03   Mean   : -91.47                     
+##                     3rd Qu.:40.03   3rd Qu.: -81.76                     
+##                     Max.   :45.05   Max.   : -71.01                     
+##                     NA's   :60      NA's   :60
+\end{verbatim}
+
+The raw dataset has 52,179 records from U.S. cities, detailing
+individual homicides from January 1, 2007, to November 5, 2015. Each
+record includes the unique identifier (uid), report date, victim details
+(name, race, age, and gender), and the city and state. Moreover,
+latitude and longitude coordinates provide precise location data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Define city\_state variable}
+\NormalTok{unsolved\_cases }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Closed without arrest"}\NormalTok{, }\StringTok{"Open/No arrest"}\NormalTok{)}
+
+\NormalTok{homicides }\OtherTok{\textless{}{-}}\NormalTok{ homicides }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{city\_state =} \FunctionTok{paste}\NormalTok{(city, state, }\AttributeTok{sep =} \StringTok{", "}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}  
+  \FunctionTok{group\_by}\NormalTok{(city\_state) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summarize}\NormalTok{(}
+    \AttributeTok{total\_homicides =} \FunctionTok{n}\NormalTok{(),}
+    \AttributeTok{unsolved\_homicides =} \FunctionTok{sum}\NormalTok{(disposition }\SpecialCharTok{\%in\%}\NormalTok{ unsolved\_cases)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{homicides}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 51 x 3
+##    city_state      total_homicides unsolved_homicides
+##    <chr>                     <int>              <int>
+##  1 Albuquerque, NM             378                146
+##  2 Atlanta, GA                 973                373
+##  3 Baltimore, MD              2827               1825
+##  4 Baton Rouge, LA             424                196
+##  5 Birmingham, AL              800                347
+##  6 Boston, MA                  614                310
+##  7 Buffalo, NY                 521                319
+##  8 Charlotte, NC               687                206
+##  9 Chicago, IL                5535               4073
+## 10 Cincinnati, OH              694                309
+## # i 41 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Use the prop.test function to estimate the proportion of homicides that are unsolved}
+\NormalTok{baltimore\_data }\OtherTok{\textless{}{-}}\NormalTok{ homicides }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(city\_state }\SpecialCharTok{==} \StringTok{"Baltimore, MD"}\NormalTok{)}
+
+\NormalTok{baltimore\_test }\OtherTok{=} \FunctionTok{prop.test}\NormalTok{(baltimore\_data}\SpecialCharTok{$}\NormalTok{unsolved\_homicides,}
+\NormalTok{                           baltimore\_data}\SpecialCharTok{$}\NormalTok{total\_homicides)}
+\NormalTok{baltimore\_results }\OtherTok{=} 
+  \FunctionTok{tidy}\NormalTok{(baltimore\_test) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(estimate, conf.low, conf.high) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rename}\NormalTok{(}
+    \AttributeTok{proportion\_unsolved =}\NormalTok{ estimate,}
+    \AttributeTok{conf\_low =}\NormalTok{ conf.low,}
+    \AttributeTok{conf\_high =}\NormalTok{ conf.high}
+\NormalTok{  )}
+\NormalTok{baltimore\_results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   proportion_unsolved conf_low conf_high
+##                 <dbl>    <dbl>     <dbl>
+## 1               0.646    0.628     0.663
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Run prop.test for each city}
+\NormalTok{city\_proportions }\OtherTok{\textless{}{-}}\NormalTok{ homicides }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{test =} \FunctionTok{map2}\NormalTok{(unsolved\_homicides, total\_homicides, }\SpecialCharTok{\textasciitilde{}} \FunctionTok{binom.test}\NormalTok{(.x, .y)),}
+    \AttributeTok{test\_summary =} \FunctionTok{map}\NormalTok{(test, broom}\SpecialCharTok{::}\NormalTok{tidy)}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unnest}\NormalTok{(test\_summary) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(city\_state, estimate, conf.low, conf.high)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Order cities by proportion}
+\NormalTok{city\_proportions }\OtherTok{\textless{}{-}}\NormalTok{ city\_proportions }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(estimate))}
+
+\CommentTok{\# Plotting}
+\FunctionTok{ggplot}\NormalTok{(city\_proportions, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(city\_state, estimate), }\AttributeTok{y =}\NormalTok{ estimate)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_errorbar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{ymin =}\NormalTok{ conf.low, }\AttributeTok{ymax =}\NormalTok{ conf.high), }\AttributeTok{width =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Proportion of Unsolved Homicides by City"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"City"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Proportion of Unsolved Homicides"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{p8105_hw5_mc5698_files/figure-latex/unnamed-chunk-15-1.pdf}
+The graph shows the proportion of unsolved homicides across U.S. cities,
+with error bars indicating confidence intervals. There is wide
+variation, with some cities below 25\% unsolved and others nearing 75\%
+which highlights disparities in case resolution rates.
+
+\end{document}
