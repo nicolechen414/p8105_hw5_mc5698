@@ -122,7 +122,7 @@ The graph shows that the average estimate of mu_hat is higher in samples where t
 #Problem 3
 ```{r}
 #Load dataset
-homicides <- read_csv("homicide-data.csv")
+homicides <- read_csv("data/homicide-data.csv")
 homicides
 summary(homicides)
 ```
