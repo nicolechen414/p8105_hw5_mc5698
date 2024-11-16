@@ -168,7 +168,7 @@ city_proportions <- homicides %>%
   ) %>%
   unnest(test_summary) %>%
   select(city_state, estimate, conf.low, conf.high)
-
+city_proportions
 ```
 
 ```{r}
